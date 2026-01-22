@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webfolio</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@100..700&family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+    
+    <!--เรียก Tailwind CSS CDN-->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!--ตั้งค่า Tailwind CSS แบบกำหนดเอง-->
+    <script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                fontFamily: {
+                    // ใช้ Outfit คู่กับ Anuphan เพื่อความ Soft และเป็นมิตร
+                    sans: ['Outfit', 'Anuphan', 'sans-serif'],
+                },
+                colors: {
+                    earth: {
+                        DEFAULT: '#1E1A16',   // พื้นหลังหลัก (จาก body background)
+                        card: '#2A2420',      // พื้นหลังการ์ด/ไอเทม
+                        hover: '#3B322D',     // สีตอน Hover
+                        accent: '#C49A6C',    // สีหัวข้อ/ปุ่ม/จุดเน้น 
+                        border: '#6B5C52',    // สีเส้นขอบ 
+                        font: {
+                            primary: '#E9DFD2',   // สีตัวอักษรหลัก
+                            secondary: '#C9B9A5', // สีคำอธิบาย
+                        }
+                    }
+                },
+                borderRadius: {
+                    'soft': '20px',      // ความมนทั่วไป
+                    'button': '12px',    // ความมนสำหรับปุ่ม
+                }
+            },
+        },
+    }
+    </script>
+</head>
+<body class="bg-earth text-earth-font-primary font-sans scroll-smooth">
+
+    <!-- Header + Navigation Bar -->
+    <header class="sticky top-0 z-50 bg-earth backdrop-blur border-b border-earth-card">
+        <nav class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+            
+            <!--logo-->
+            <div class="text-lg font-semibold tracking-wide">
+                Cho<span class="text-earth-accent">.dev</span>
+            </div>
+
+            <!-- ปุ่มเมนู บนคอมพิวเตอร์ -->
+            <ul class="hidden md:flex gap-8 text-sm bg-earth-card text-white px-4 py-2 rounded-button">
+                <li><a href="#home" class="nav-link text-earth-font-primary">Home</a></li>
+                <li><a href="#about" class="nav-link text-earth-font-primary">About</a></li>
+                <li><a href="#portfolio" class="nav-link text-earth-font-primary">Portfolio</a></li>
+                <li><a href="#contact" class="nav-link text-earth-font-primary">Contact</a></li>
+            </ul>
+
+            <!-- ปุ่มเมนู บนโทรศัพท์ -->
+            <button id="menu-btn" class="md:hidden text-xl">
+                ☰
+            </button>
+
+            <!-- เมนูโทรศัพท์ ซ่อน/แสดง -->
+            <div id="mobile-menu" class="hidden md:hidden px-4 py-4">
+                <ul class="flex flex-col gap-4 text-sm">
+                    <li><a href="#home" class="block nav-link">Home</a></li>
+                    <li><a href="#about" class="block nav-link">About</a></li>
+                    <li><a href="#portfolio" class="block nav-link">Portfolio</a></li>
+                    <li><a href="#contact" class="block nav-link">Contact</a></li>
+                </ul>
+            </div>
+
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section
+        id="home"
+        class="min-h-screen flex items-center justify-center px-6"
+    >
+        <div class="max-w-4xl text-center space-y-6">
+
+            <!-- Intro Text 
+                ชื่อเล่น + คำแนะนำตัวสั้นๆ
+            -->
+            <p class="text-sm tracking-widest text-earth-font-primary uppercase">
+                Hello, I'm
+            </p>
+            
+            <h1 class="text-4xl md:text-3xl font-bold tracking-tight text-earth-font-primary">
+                Cho
+            </h1>
+
+            <h2 class="text-xl md:text-2xl text-earth-font-secondary">
+                Freelance <span class="text-earth-accent">Web Developer & Discord Bot Developer</span>
+            </h2>
+
+            <p class="max-w-xl mx-auto text-earth-font-secondary leading-relaxed">
+                "ผมเป็นฟรีแลนซ์ที่ชอบสร้างระบบแก้ปัญหาครับจากที่เคยลองทำ Discord Bot เพื่อเป็นผู้ช่วยจัดการเรื่องต่างๆ ก็เริ่มจริงจังจนหันมาพัฒนา เว็บไซต์ และระบบหลังบ้านต่างๆ"
+            </p>
+
+            <!-- ปุ่ม -->
+            <div class="flex justify-center gap-4 pt-6">
+                <a
+                    href="#portfolio"
+                    class="px-6 py-3 rounded-2xl bg-earth-card hover:bg-earth-hover transition text-sm font-md"
+                >
+                    View Portfolio
+                </a>
+
+                <a
+                    href="#contact"
+                    class="px-6 py-3 rounded-2xl border border-earth-border hover:bg-earth-hover transition text-sm font-md"
+                >
+                    Contact Me
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- About Me Section -->
+    <section id="about" class="px-6 py-24 bg-earth-card">
+        <div class="max-w-6xl mx-auto grid gap-12 md:grid-cols-2 items-center">
+
+            <!-- profile picture -->
+            <div class="flex justify-center">
+                <img
+                    src="assets/img/Profile.jpeg"
+                    alt="Profile Picture"
+                    class="w-100 h-100 object-cover rounded-3xl border border-earth-border hover:border-earth-hover transition"
+                />
+            </div>
+
+            <!-- about me content -->
+            <div class="space-y-6">
+
+                <h2 class="text-3xl font-semibold">
+                    About Me
+                </h2>
+
+                <p class="text-earth-font-primary leading-relaxed">
+                    ชื่อ: อนันตสิน เสาร์แก้ว<br>
+                    อายุ: 20 ปี<br>
+                    สถานะ: นักศึกษา / ฟรีแลนซ์<br>
+                    รหัสนักศึกษา: 116710906054-7<br>
+                    <span class="text-earth-font-secondary">ขณะนี้กำลังศึกษาอยู่ที่ มหาวิทยาลัยเทคโนโลยีราชมงคลธัญบุรี คณะวิทยาศาสตร์และเทคโนโลยี สาขาเทคโนโลยีสารสนเทศและการสื่อสารดิจิทัล</span><br>
+                </p>
+
+                <!-- Skills  -->
+                <div>
+                    <h3 class="text-xl font-medium mb-4">
+                        Skills
+                    </h3>
+
+                    <ul class="flex flex-wrap gap-3">
+                        <li class="px-4 py-2 rounded-xl bg-earth-hover text-sm">HTML</li>
+                        <li class="px-4 py-2 rounded-xl bg-earth-hover text-sm">CSS</li>
+                        <li class="px-4 py-2 rounded-xl bg-earth-hover text-sm">JavaScript</li>
+                        <li class="px-4 py-2 rounded-xl bg-earth-hover text-sm">Python</li>
+                        <li class="px-4 py-2 rounded-xl bg-earth-hover text-sm">Discord Bot Development</li>
+                        <li class="px-4 py-2 rounded-xl bg-earth-hover text-sm">Web Development</li>
+                        <li class="px-4 py-2 rounded-xl bg-earth-hover text-sm">Database Management</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="px-6 py-24">
+        <div class="max-w-6xl mx-auto space-y-12">
+
+            <div class="text-center space-y-3">
+                <h2 class="text-3xl font-semibold">Portfolio</h2>
+                <p class="text-earth-font-secondary">
+                    ตัวอย่างผลงานที่เคยทำและประสบการณ์ต่างๆ
+                </p>
+            </div>
+
+            <!-- Portfolio Items -->
+            <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+                <div class="bg-earth-card rounded-3xl overflow-hidden hover:translate-y-[-4px] transition">
+                    <img
+                        src="assets/img/Towhu_project.png"
+                        alt="Towhu Project"
+                        class="h-48 w-full object-cover"
+                    />
+
+                    <div class="p-6 space-y-4">
+                        <h3 class="text-lg font-md">Towhu Bot Discord</h3>
+                        <p class="text-sm text-earth-font-secondary">
+                            Discord Bot สำหรับช่วยจัดการเซิร์ฟเวอร์ Discord8
+                        </p>
+
+                        <p class="text-xs text-earth-font-secondary">
+                            JavaScript • Discord.js • MongoDB
+                        </p>
+
+                        <div class="flex gap-4 pt-2">
+                            <a
+                                href="#"
+                                class="text-sm text-earth-accent hover:underline"
+                                target="_blank"
+                            >
+                            Source Code
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-earth-card rounded-3xl overflow-hidden hover:translate-y-[-4px] transition">
+                    <img
+                        src="assets/img/home_office.jpeg"
+                        alt="Towhu Project"
+                        class="h-48 w-full object-cover"
+                    />
+
+                    <div class="p-6 space-y-4">
+                        <h3 class="text-lg font-md">Current Project</h3>
+                        <p class="text-sm text-earth-font-secondary">
+                            Homelab network ระบบจัดการอุปกรณ์เครือข่ายและฮาร์ดแวร์ต่างๆภายในบ้าน
+                        </p>
+
+                        <p class="text-xs text-earth-font-secondary">
+                            Linux • Cloudflare Tunnel • Docker
+                        </p>
+                        
+                    </div>
+                </div>
+
+                <div class="bg-earth-card rounded-3xl overflow-hidden hover:translate-y-[-4px] transition">
+                    <img
+                        src="assets/img/abico_exp.jpeg"
+                        alt="Towhu Project"
+                        class="h-48 w-full object-cover"
+                    />
+
+                    <div class="p-6 space-y-4">
+                        <h3 class="text-lg font-md">Experience</h3>
+                        <p class="text-sm text-earth-font-secondary">
+                            ประสบการณ์ฝึกงานที่บริษัท Abico จำกัด ในตำแหน่ง IT support เป็นระยะเวลา 1 เทอมการศึกษา
+                        </p>
+
+                        <p class="text-xs text-earth-font-secondary">
+                            IT support
+                        </p>
+                        
+                    </div>
+                </div>
+
+                <div class="bg-earth-card rounded-3xl overflow-hidden hover:translate-y-[-4px] transition">
+                    <img
+                        src="assets/img/IOT_exp.JPG"
+                        alt="Towhu Project"
+                        class="h-50 w-full object-cover"
+                    />
+
+                    <div class="p-6 space-y-4">
+                        <h3 class="text-lg font-md">IOT Experience</h3>
+                        <p class="text-sm text-earth-font-secondary">
+                            ประสบการณ์แข่งขันทักษะการเขียนโปรแกรมควบคุมอุปกรณ์ IOT และได้รับรางวัลชนะเลิศระดับภาคกลาง ปี 2566
+                            และเป็นตัวแทนไปแข่งขันระดับชาติ
+                        </p>
+
+                        <p class="text-xs text-earth-font-secondary">
+                            IOT Device Management • Python
+                        </p>
+                        
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="px-6 py-24 bg-earth">
+        <div class="max-w-xl mx-auto space-y-10">
+
+            <!-- section title-->
+            <div class="text-center space-y-3">
+                <h2 class="text-3xl font-semibold">Contact</h2>
+                <a class="text-earth-font-secondary">สามารถติดต่อได้ตามช่องทาง</a>
+            </div>
+
+            <!-- Contact Info -->
+            <div>
+                <p>Email: <a href="mailto:zzaysbr@gmail.com" class="text-earth-accent hover:underline">zzaysbr@gmail.com</a></p>
+                <p>Github: <a href="https://github.com/Zzaysbr" class="text-earth-accent hover:underline">Zzaysbr</a></p>
+            </div>
+
+            <!-- Contact Form -->
+            <form id="contact-form" class="space-y-6">
+                <div>
+                    <label class="block text-sm mb-1">Name</label>
+                    <input 
+                        type="text"
+                        id="name"
+                        class="w-full px-4 py-3 rounded-xl bg-earth border border-earth-border focus:border-earth-accent" 
+                    />
+                </div>
+
+                <div>
+                    <label class="block text-sm mb-1">Email</label>
+                    <input 
+                        type="email"
+                        id="email"
+                        class="w-full px-4 py-3 rounded-xl bg-earth border border-earth-border focus:border-earth-accent" 
+                    />
+                </div>
+
+                <div>
+                    <label class="block text-sm mb-1">Message</label>
+                    <textarea 
+                        id="message"
+                        rows="4"
+                        class="w-full px-4 py-3 rounded-xl bg-earth border border-earth-border focus:border-earth-accent"
+                    ></textarea>
+                </div>
+
+                <button
+                    type="submit"
+                    class="px-6 py-3 rounded-2xl bg-earth-accent hover:bg-earth-hover transition text-sm font-md"
+                >
+                    Submit
+                </button>
+
+                <div id="form-feedback"></div>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        footer
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
