@@ -1,35 +1,110 @@
+// ================================
+// CONFIG
+// ================================
+const HEADER_OFFSET = 96;
 
-
-// ================================= //
-// สคริปต์นี้ใช้เพื่อจัดการเมนูมือถือและการเลื่อนหน้าอย่างราบรื่น
-// ================================= //
-// สร้างตัวแปรเพื่อเก็บการอ้างอิงไปยังองค์ประกอบต่างๆ ใน DOM
+// ================================
+// ELEMENTS
+// ================================
 const menuBtn = document.getElementById('menu-btn');
 const mobileMenu = document.getElementById('mobile-menu');
 const navLinks = document.querySelectorAll('.nav-link');
 
+// ================================
+// MENU STATE
+// ================================
+function openMenu() {
+  mobileMenu.classList.remove('hidden');
+  document.body.classList.add('overflow-hidden');
+}
 
-// ฟังก์ชันเพื่อสลับการแสดงผลเมนูมือถือ
-menuBtn.addEventListener('click', () => {
-    mobileMenu.classList.toggle('hidden');
+function closeMenu() {
+  mobileMenu.classList.add('hidden');
+  document.body.classList.remove('overflow-hidden');
+}
+
+function toggleMenu() {
+  mobileMenu.classList.contains('hidden') ? openMenu() : closeMenu();
+}
+
+// ================================
+// MENU EVENTS
+// ================================
+menuBtn.addEventListener('click', toggleMenu);
+
+// ปิดเมนูเมื่อคลิกพื้นหลัง overlay
+mobileMenu.addEventListener('click', (e) => {
+  if (e.target === mobileMenu) {
+    closeMenu();
+  }
 });
 
-// ฟังก์ชั่นเลื่อนหน้าไปยังส่วนต่างๆ ของหน้าเว็บเมื่อคลิกที่ลิงก์ในเมนู
+// ================================
+// SMOOTH SCROLL
+// ================================
+function smoothScrollTo(targetId) {
+  const target = document.querySelector(targetId);
+  if (!target) return;
+
+  const targetPosition =
+    target.getBoundingClientRect().top + window.pageYOffset - HEADER_OFFSET;
+
+  window.scrollTo({
+    top: targetPosition,
+    behavior: 'smooth'
+  });
+}
+
+// ================================
+// NAV LINK HANDLER
+// ================================
 navLinks.forEach(link => {
-    link.addEventListener('click', (e) => {
-        e.preventDefault();
+  link.addEventListener('click', (e) => {
+    const targetId = link.getAttribute('href');
+    if (!targetId || !targetId.startsWith('#')) return;
 
-        const targetId = link.getAttribute('href');
-        const targetSection = document.querySelector(targetId);
+    e.preventDefault();
 
-        targetSection.scrollIntoView({
-            behavior: 'smooth'
+    closeMenu();
+
+    // รอ menu animation ปิดก่อนเลื่อน
+    setTimeout(() => {
+      smoothScrollTo(targetId);
+    }, 100);
+  });
+});
+
+
+// ================================= //
+// สคริปต์นี้ใช้เพื่อเน้นเมนูตามส่วนที่เลื่อนผ่าน
+// ================================= //
+const sections = document.querySelectorAll("section");
+
+const observer = new IntersectionObserver(
+  entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(link => {
+          link.classList.remove("text-earth-accent", "font-semibold");
         });
 
-        // ซ่อนเมนูมือถือหลังจากคลิกเลือกเมนู
-        mobileMenu.classList.add('hidden');
+        const activeLink = document.querySelector(
+          `.nav-link[href="#${entry.target.id}"]`
+        );
+
+        if (activeLink) {
+          activeLink.classList.add("text-earth-accent", "font-semibold");
+        }
+      }
     });
-});
+  },
+  {
+    root: null,
+    threshold: 0.6 // โฟกัส section กลางจอ
+  }
+);
+
+sections.forEach(section => observer.observe(section));
 
 
 
@@ -55,6 +130,8 @@ form.addEventListener('submit', (e) => {
     const email = emailInput.value.trim();
     const message = messageInput.value.trim();
 
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
     // ตรวจสอบข้อมูลที่กรอก
     if (!name || !email || !message){
         feedback.textContent = "กรุณากรอกข้อมูลให้ครบถ้วนทุกช่อง.";
@@ -62,7 +139,7 @@ form.addEventListener('submit', (e) => {
         return;
     }
 
-    if (!email.includes('@')){
+    if (!emailPattern.test(email)) {
         feedback.textContent = "กรุณากรอกอีเมลที่ถูกต้อง.";
         feedback.className = "text-orange-600 text-sm";
         return;

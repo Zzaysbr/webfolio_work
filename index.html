@@ -11,6 +11,14 @@
     
     <!--เรียก Tailwind CSS CDN-->
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        section {
+            scroll-margin-top: 96px;
+        }
+    </style>
 
     <!--ตั้งค่า Tailwind CSS แบบกำหนดเอง-->
     <script>
@@ -43,7 +51,7 @@
     }
     </script>
 </head>
-<body class="bg-earth text-earth-font-primary font-sans scroll-smooth">
+<body class="bg-earth text-earth-font-primary font-sans">
 
     <!-- Header + Navigation Bar -->
     <header class="sticky top-0 z-50 bg-earth backdrop-blur border-b border-earth-card">
@@ -63,17 +71,19 @@
             </ul>
 
             <!-- ปุ่มเมนู บนโทรศัพท์ -->
-            <button id="menu-btn" class="md:hidden text-xl">
+            <button id="menu-btn" class="md:hidden text-xl" aria-label="Toggle menu">
                 ☰
             </button>
 
             <!-- เมนูโทรศัพท์ ซ่อน/แสดง -->
-            <div id="mobile-menu" class="hidden md:hidden px-4 py-4">
-                <ul class="flex flex-col gap-4 text-sm">
-                    <li><a href="#home" class="block nav-link">Home</a></li>
-                    <li><a href="#about" class="block nav-link">About</a></li>
-                    <li><a href="#portfolio" class="block nav-link">Portfolio</a></li>
-                    <li><a href="#contact" class="block nav-link">Contact</a></li>
+            <div id="mobile-menu" 
+                class="hidden fixed inset-0 z-40 bg-black/50 backdrop-blur-sm md:hidden px-4 py-4"
+            >
+                <ul class="flex flex-col gap-4 text-sm"> 
+                    <li><a href="#home" class="block nav-link active:scale-95 transition">Home</a></li>
+                    <li><a href="#about" class="block nav-link active:scale-95 transition">About</a></li>
+                    <li><a href="#portfolio" class="block nav-link active:scale-95 transition">Portfolio</a></li>
+                    <li><a href="#contact" class="block nav-link active:scale-95 transition">Contact</a></li>
                 </ul>
             </div>
 
@@ -94,7 +104,7 @@
                 Hello, I'm
             </p>
             
-            <h1 class="text-4xl md:text-3xl font-bold tracking-tight text-earth-font-primary">
+            <h1 class="text-4xl md:text-5xl font-bold tracking-tight text-earth-font-primary">
                 Cho
             </h1>
 
@@ -110,14 +120,14 @@
             <div class="flex justify-center gap-4 pt-6">
                 <a
                     href="#portfolio"
-                    class="px-6 py-3 rounded-2xl bg-earth-card hover:bg-earth-hover transition text-sm font-md"
+                    class="nav-link px-6 py-3 rounded-2xl bg-earth-card hover:bg-earth-hover transition text-sm font-md"
                 >
                     View Portfolio
                 </a>
 
                 <a
                     href="#contact"
-                    class="px-6 py-3 rounded-2xl border border-earth-border hover:bg-earth-hover transition text-sm font-md"
+                    class="nav-link px-6 py-3 rounded-2xl border border-earth-border hover:bg-earth-hover transition text-sm font-md"
                 >
                     Contact Me
                 </a>
@@ -136,7 +146,7 @@
                 <img
                     src="assets/img/Profile.jpeg"
                     alt="Profile Picture"
-                    class="w-100 h-100 object-cover rounded-3xl border border-earth-border hover:border-earth-hover transition"
+                    class="w-full max-w-xs object-cover aspect-square rounded-3xl border border-earth-border hover:border-earth-hover transition"
                 />
             </div>
 
@@ -197,17 +207,17 @@
                         class="h-48 w-full object-cover"
                     />
 
-                    <div class="p-6 space-y-4">
+                    <div class="p-6 space-y-4 flex flex-col h-full">
                         <h3 class="text-lg font-md">Towhu Bot Discord</h3>
                         <p class="text-sm text-earth-font-secondary">
                             Discord Bot สำหรับช่วยจัดการเซิร์ฟเวอร์ Discord8
                         </p>
 
-                        <p class="text-xs text-earth-font-secondary">
+                        <p class="text-xs text-earth-font-secondary mt-auto">
                             JavaScript • Discord.js • MongoDB
                         </p>
 
-                        <div class="flex gap-4 pt-2">
+                        <div class="flex gap-4 pt-2 mt-auto">
                             <a
                                 href="#"
                                 class="text-sm text-earth-accent hover:underline"
@@ -226,13 +236,13 @@
                         class="h-48 w-full object-cover"
                     />
 
-                    <div class="p-6 space-y-4">
+                    <div class="p-6 space-y-4 flex flex-col h-full">
                         <h3 class="text-lg font-md">Current Project</h3>
-                        <p class="text-sm text-earth-font-secondary">
+                        <p class="text-sm text-earth-font-secondary mt-auto">
                             Homelab network ระบบจัดการอุปกรณ์เครือข่ายและฮาร์ดแวร์ต่างๆภายในบ้าน
                         </p>
 
-                        <p class="text-xs text-earth-font-secondary">
+                        <p class="text-xs text-earth-font-secondary mt-auto">
                             Linux • Cloudflare Tunnel • Docker
                         </p>
                         
@@ -246,13 +256,13 @@
                         class="h-48 w-full object-cover"
                     />
 
-                    <div class="p-6 space-y-4">
+                    <div class="p-6 space-y-4 flex flex-col h-full">
                         <h3 class="text-lg font-md">Experience</h3>
-                        <p class="text-sm text-earth-font-secondary">
+                        <p class="text-sm text-earth-font-secondary mt-auto">
                             ประสบการณ์ฝึกงานที่บริษัท Abico จำกัด ในตำแหน่ง IT support เป็นระยะเวลา 1 เทอมการศึกษา
                         </p>
 
-                        <p class="text-xs text-earth-font-secondary">
+                        <p class="text-xs text-earth-font-secondary mt-auto">
                             IT support
                         </p>
                         
@@ -266,14 +276,14 @@
                         class="h-50 w-full object-cover"
                     />
 
-                    <div class="p-6 space-y-4">
+                    <div class="p-6 space-y-4 flex flex-col h-full">
                         <h3 class="text-lg font-md">IOT Experience</h3>
-                        <p class="text-sm text-earth-font-secondary">
+                        <p class="text-sm text-earth-font-secondary mt-auto">
                             ประสบการณ์แข่งขันทักษะการเขียนโปรแกรมควบคุมอุปกรณ์ IOT และได้รับรางวัลชนะเลิศระดับภาคกลาง ปี 2566
                             และเป็นตัวแทนไปแข่งขันระดับชาติ
                         </p>
 
-                        <p class="text-xs text-earth-font-secondary">
+                        <p class="text-xs text-earth-font-secondary mt-auto">
                             IOT Device Management • Python
                         </p>
                         
@@ -308,7 +318,7 @@
                     <input 
                         type="text"
                         id="name"
-                        class="w-full px-4 py-3 rounded-xl bg-earth border border-earth-border focus:border-earth-accent" 
+                        class="w-full px-4 py-3 rounded-xl bg-earth border border-earth-border focus:border-earth-accent focus:outline-none focus:ring-1 focus:ring-earth-accent" 
                     />
                 </div>
 
@@ -317,7 +327,7 @@
                     <input 
                         type="email"
                         id="email"
-                        class="w-full px-4 py-3 rounded-xl bg-earth border border-earth-border focus:border-earth-accent" 
+                        class="w-full px-4 py-3 rounded-xl bg-earth border border-earth-border focus:border-earth-accent focus:outline-none focus:ring-1 focus:ring-earth-accent" 
                     />
                 </div>
 
@@ -326,7 +336,7 @@
                     <textarea 
                         id="message"
                         rows="4"
-                        class="w-full px-4 py-3 rounded-xl bg-earth border border-earth-border focus:border-earth-accent"
+                        class="w-full px-4 py-3 rounded-xl bg-earth border border-earth-border focus:border-earth-accent focus:outline-none focus:ring-1 focus:ring-earth-accent"
                     ></textarea>
                 </div>
 
@@ -342,10 +352,34 @@
         </div>
     </section>
 
-    <footer>
-        footer
-    </footer>
+    <footer class="border-t border-earth px-4 py-8">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-earth-font-secondary">
 
+            <p>
+                &copy; 2024 Cho.dev. All rights reserved.
+            </p>
+
+            <div class="flex gap-6">
+                <a 
+                    href="https://github.com/Zzaysbr"
+                    target="_blank"
+                    class="hover:text-earth-font-primary transition"
+                >
+                    GitHub
+                </a>
+                
+                <a 
+                    href="https://www.instagram.com/n1cxltine_/"
+                    target="_blank"
+                    class="hover:text-earth-font-primary transition"
+                >
+                    Instagram
+                </a>
+            </div>
+        </div>
+        
+    </footer>
+    
     <script src="script.js"></script>
 </body>
 </html>
